@@ -1,0 +1,18 @@
+[server]
+headless = true
+```
+**Ctrl+S** save karo.
+
+---
+
+```
+student_predictor/
+├── .streamlit/
+│   └── config.toml
+├── app.py
+├── requirements.txt
+├── runtime.txt
+├── ridge_model.pkl
+├── scaler.pkl
+├── feature_names.json
+└── student_habits_performance.csv
