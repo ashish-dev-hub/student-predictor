@@ -6,7 +6,6 @@ import json
 import plotly.express as px
 import plotly.graph_objects as go
 
-# ─── Page Config ─────────────────────────────────────────────
 st.set_page_config(
     page_title="Student Performance Predictor",
     page_icon="🎓",
@@ -14,7 +13,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ─── Custom CSS ───────────────────────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
@@ -140,8 +138,6 @@ hr { border-color: #1e2230 !important; }
 </style>
 """, unsafe_allow_html=True)
 
-
-# ─── Load Model ───────────────────────────────────────────────
 @st.cache_resource
 def load_model():
     model   = joblib.load('ridge_model.pkl')
@@ -163,7 +159,6 @@ except Exception as e:
     st.error(f"⚠️ Model files nahi mile: {e}\n\nPehle Colab mein Cell 18 chalao aur `.pkl` files is folder mein rakho.")
 
 
-# ─── Sidebar — Input Form ─────────────────────────────────────
 with st.sidebar:
     st.markdown("## 🎓 Student Profile")
     st.markdown("---")
@@ -196,8 +191,6 @@ with st.sidebar:
     st.markdown("---")
     predict_btn = st.button("🔮 Predict Score")
 
-
-# ─── Encode Input ─────────────────────────────────────────────
 def encode_input():
     diet_map     = {"Poor": 0, "Fair": 1, "Good": 2}
     inet_map     = {"Poor": 0, "Average": 1, "Good": 2}
@@ -247,13 +240,11 @@ def get_tips(score, study_hours, attendance, sleep_hours, social_media, mental_h
     return tips
 
 
-# ─── Main Content ─────────────────────────────────────────────
-st.markdown("# STUDENT PERFORMANCE PRDEICTOR")
+st.markdown("# STUDENT PERFORMANCE PREDICTOR")
 st.markdown("---")
 
 tab1, tab2, tab3 = st.tabs(["🔮 Prediction", "📊 EDA & Insights", "ℹ️ About Model"])
 
-# ══ TAB 1: PREDICTION ══════════════════════════════════════════
 with tab1:
     if model_loaded and predict_btn:
         input_df   = encode_input()
@@ -275,7 +266,6 @@ with tab1:
             </div>
             """, unsafe_allow_html=True)
 
-            # Gauge chart
             fig_gauge = go.Figure(go.Indicator(
                 mode="gauge+number",
                 value=prediction,
@@ -302,7 +292,7 @@ with tab1:
             st.plotly_chart(fig_gauge, use_container_width=True)
 
         with col2:
-            # Habit analysis radar
+            
             habits = {
                 'Study Hours':    min(study_hours / 8 * 100, 100),
                 'Attendance':     attendance,
@@ -335,7 +325,7 @@ with tab1:
             )
             st.plotly_chart(fig_radar, use_container_width=True)
 
-        # Tips section
+        
         st.markdown("### 💡 Personalized Tips")
         tips = get_tips(prediction, study_hours, attendance, sleep_hours, social_media, mental_health)
         for tip in tips:
@@ -351,8 +341,6 @@ with tab1:
         </div>
         """, unsafe_allow_html=True)
 
-
-# ══ TAB 2: EDA ═════════════════════════════════════════════════
 with tab2:
     if model_loaded:
         DARK = dict(paper_bgcolor='#13161e', plot_bgcolor='#13161e',
@@ -401,7 +389,6 @@ with tab2:
             fig4.update_layout(**DARK, height=300, showlegend=False)
             st.plotly_chart(fig4, use_container_width=True)
 
-        # Correlation heatmap
         st.markdown("**Correlation Heatmap (Numeric Features)**")
         num_cols = df.select_dtypes(include=np.number).drop(columns=['age']).corr()
         fig5 = px.imshow(num_cols, color_continuous_scale='RdBu_r',
@@ -412,7 +399,6 @@ with tab2:
         st.plotly_chart(fig5, use_container_width=True)
 
 
-# ══ TAB 3: ABOUT MODEL ═════════════════════════════════════════
 with tab3:
     col1, col2 = st.columns(2)
     with col1:
@@ -439,7 +425,7 @@ with tab3:
         """)
 
     st.markdown("### 🔢 Ridge Coefficients (Feature Impact)")
-    st.markdown("*🟢 Positive = score badhta hai    🔴 Negative = score girta hai*")
+    st.markdown("*🟢 Positive = Positive impact on score    🔴 Negative = Negative impact on score*")
 
     coef_df = pd.DataFrame({
         'Feature': feature_names,
@@ -463,4 +449,4 @@ with tab3:
     st.plotly_chart(fig_feat, use_container_width=True)
 
     st.markdown("---")
-    st.markdown(" BUILT FOR BDCOE ")
+    st.markdown(" BUILT FOR  ")
