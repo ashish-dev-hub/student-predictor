@@ -25,19 +25,16 @@ h1, h2, h3 {
     font-family: 'Syne', sans-serif !important;
 }
 
-/* Main background */
 .stApp {
     background: #0d0f14;
     color: #e8e6e0;
 }
 
-/* Sidebar */
 [data-testid="stSidebar"] {
     background: #13161e !important;
     border-right: 1px solid #1e2230;
 }
 
-/* Cards */
 .metric-card {
     background: #13161e;
     border: 1px solid #1e2230;
@@ -78,19 +75,14 @@ h1, h2, h3 {
     margin-bottom: 12px;
 }
 
-/* Slider labels */
 .stSlider label { color: #9ca3af !important; font-size: 13px !important; }
 
-/* Select boxes */
 .stSelectbox label { color: #9ca3af !important; font-size: 13px !important; }
 
-/* Divider */
 hr { border-color: #1e2230 !important; }
 
-/* Plotly charts bg */
 .js-plotly-plot { border-radius: 12px; overflow: hidden; }
 
-/* Tabs */
 .stTabs [data-baseweb="tab-list"] {
     background: #13161e;
     border-radius: 12px;
@@ -108,7 +100,6 @@ hr { border-color: #1e2230 !important; }
     color: #e8e6e0 !important;
 }
 
-/* Predict button */
 .stButton > button {
     background: linear-gradient(135deg, #4f8ef7, #a78bfa) !important;
     color: white !important;
@@ -124,7 +115,6 @@ hr { border-color: #1e2230 !important; }
 }
 .stButton > button:hover { opacity: 0.85 !important; }
 
-/* Info boxes */
 .tip-box {
     background: #0f1520;
     border: 1px solid #1a2540;
@@ -449,4 +439,4 @@ with tab3:
     st.plotly_chart(fig_feat, use_container_width=True)
 
     st.markdown("---")
-    st.markdown(" BUILT FOR  ")
+    st.markdown("Built to understand and predict student performance using Machine Learning")
